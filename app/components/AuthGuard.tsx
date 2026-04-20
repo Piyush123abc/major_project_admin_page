@@ -13,13 +13,14 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
             const token = localStorage.getItem("access_token");
             const isLoginPage = pathname === "/login";
             const isHomePage = pathname === "/";
+            const isMissionPage = pathname === "/mission";
 
             if (!token) {
-                if (!isLoginPage && !isHomePage) {
+                if (!isLoginPage && !isHomePage && !isMissionPage) {
                     router.push("/login");
                     setIsAuthenticated(false);
                 } else {
-                    setIsAuthenticated(true); // Allow login and home page
+                    setIsAuthenticated(true); // Allow public routes
                 }
             } else {
                 if (isLoginPage) {

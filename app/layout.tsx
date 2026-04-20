@@ -12,16 +12,18 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
-  // We don't want the sidebar showing up on the login screen
+  // We don't want the sidebar showing up on the login screen or mission page
   const isLoginPage = pathname === "/login";
+  const isMissionPage = pathname === "/mission";
+  const hideSidebar = isLoginPage || isMissionPage;
 
   return (
     <html lang="en">
       <body className="bg-gray-50 text-gray-900 flex min-h-screen">
         <AuthGuard>
-          {!isLoginPage && <Sidebar />}
+          {!hideSidebar && <Sidebar />}
           <main className="flex-1 flex flex-col h-screen overflow-hidden">
-            <div className="flex-1 overflow-y-auto p-8">
+            <div className={`flex-1 overflow-y-auto ${isMissionPage ? '' : 'p-8'}`}>
               {children}
             </div>
           </main>

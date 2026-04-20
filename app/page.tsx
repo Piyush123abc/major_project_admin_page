@@ -1,6 +1,10 @@
 "use client";
 
-import { LayoutDashboard, Shield, Users, Database, Zap } from "lucide-react";
+import Link from "next/link";
+import { 
+  Shield, Users, Database, Zap, 
+  ArrowRight, Sparkles, Target, Microscope
+} from "lucide-react";
 
 export default function DashboardHome() {
   return (
@@ -43,44 +47,73 @@ export default function DashboardHome() {
         <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/4 w-64 h-64 bg-black/10 rounded-full blur-2xl"></div>
       </section>
 
-      {/* ── PROJECT EXPLANATION (TODO) ── */}
+      {/* ── MISSION LINK SECTION ── */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2 space-y-8">
-          <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-              <LayoutDashboard className="w-6 h-6 text-blue-600" />
-              Project Mission & Architecture
-            </h2>
+        <div className="md:col-span-2 space-y-6">
+          <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-200 p-10 shadow-sm group hover:shadow-xl transition-all duration-500">
+            {/* Background Glow */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
             
-            {/* TODO: Add detailed project explanation here */}
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p className="p-6 bg-gray-50 rounded-xl border border-dashed border-gray-300 text-gray-500 text-center font-medium">
-                [ TODO: Implementation of project explanation goes here ]
-              </p>
-              <p>
-                Our system leverages Bluetooth Low Energy (BLE) Mesh technology to create a self-healing, 
-                decentralized network for automated attendance tracking in complex indoor environments.
-              </p>
+            <div className="relative z-10 space-y-8">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 rotate-3 group-hover:rotate-6 transition-transform">
+                  <Target className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">Project Mission</h2>
+                  <p className="text-blue-600 font-bold text-sm uppercase tracking-widest mt-1">Innovation & Problem Solving</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <p className="text-xl text-gray-600 leading-relaxed font-medium">
+                  We are on a mission to redefine campus attendance through the power of 
+                  <span className="text-blue-600 px-2">BLE Mesh Networking</span>.
+                </p>
+                <p className="text-gray-500 leading-relaxed">
+                  The current education system is plagued by inefficient, expensive, and easily defeated 
+                  attendance tracking methods. Our peer-to-peer approach eliminates bottlenecks and 
+                  ensures integrity without expensive hardware.
+                </p>
+              </div>
+
+              <div className="pt-4 flex flex-wrap gap-4">
+                <Link 
+                  href="/mission"
+                  className="inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-500/20 active:scale-95 group"
+                >
+                  Explore Mission & Architecture
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                
+                <div className="flex items-center gap-2 text-gray-400 text-sm font-bold ml-2">
+                  <Microscope className="w-4 h-4 text-blue-400" />
+                  <span>Research Backed</span>
+                </div>
+              </div>
             </div>
+
+            {/* Decorative Icon in BG */}
+            <Sparkles className="absolute bottom-10 right-10 w-32 h-32 text-gray-50 opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 -rotate-12 pointer-events-none" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-6 bg-blue-50 rounded-2xl border border-blue-100 flex flex-col gap-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shadow-md">
-                <Shield className="w-6 h-6 text-white" />
+            <div className="p-8 bg-blue-50 rounded-3xl border border-blue-100 flex flex-col gap-6 hover:bg-blue-100/50 transition-colors">
+              <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200">
+                <Shield className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-gray-800">Secure Protocol</h3>
-                <p className="text-sm text-gray-600 mt-1">End-to-end encrypted telemetry ensures data privacy.</p>
+                <h3 className="font-bold text-xl text-gray-900">Secure Protocol</h3>
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed font-medium">End-to-end encrypted telemetry ensures data privacy and network integrity.</p>
               </div>
             </div>
-            <div className="p-6 bg-indigo-50 rounded-2xl border border-indigo-100 flex flex-col gap-4">
-              <div className="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                <Zap className="w-6 h-6 text-white" />
+            <div className="p-8 bg-indigo-50 rounded-3xl border border-indigo-100 flex flex-col gap-6 hover:bg-indigo-100/50 transition-colors">
+              <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
+                <Zap className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="font-bold text-gray-800">Real-time Sync</h3>
-                <p className="text-sm text-gray-600 mt-1">Instant updates from the BLE mesh to the dashboard.</p>
+                <h3 className="font-bold text-xl text-gray-900">Real-time Sync</h3>
+                <p className="text-sm text-gray-600 mt-2 leading-relaxed font-medium">Instant updates from the BLE mesh to the command dashboard.</p>
               </div>
             </div>
           </div>
@@ -88,42 +121,47 @@ export default function DashboardHome() {
 
         {/* ── QUICK STATS / SYSTEM STATUS ── */}
         <div className="space-y-6">
-          <div className="bg-gray-900 rounded-2xl p-8 text-white shadow-xl flex flex-col gap-6">
-            <h3 className="text-lg font-bold flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+          <div className="bg-gray-950 rounded-[32px] p-10 text-white shadow-2xl flex flex-col gap-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <h3 className="text-xl font-bold flex items-center gap-3">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
               System Status
             </h3>
             
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">API Server</span>
-                <span className="text-green-400 font-mono">ONLINE</span>
+                <span className="text-gray-400 font-medium">API Server</span>
+                <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded-lg border border-green-500/20 text-[10px] font-black uppercase tracking-widest">ONLINE</span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">Database</span>
-                <span className="text-green-400 font-mono">CONNECTED</span>
+                <span className="text-gray-400 font-medium">Database Cluster</span>
+                <span className="bg-green-500/10 text-green-400 px-3 py-1 rounded-lg border border-green-500/20 text-[10px] font-black uppercase tracking-widest">CONNECTED</span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-gray-400">BLE Gateway</span>
-                <span className="text-yellow-400 font-mono">STANDBY</span>
+                <span className="text-gray-400 font-medium">Mesh Gateway</span>
+                <span className="bg-yellow-500/10 text-yellow-400 px-3 py-1 rounded-lg border border-yellow-500/20 text-[10px] font-black uppercase tracking-widest">STANDBY</span>
               </div>
             </div>
 
             <hr className="border-gray-800" />
 
             <div className="space-y-1">
-              <p className="text-3xl font-black text-blue-400">99.9%</p>
-              <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Uptime Reliability</p>
+              <p className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">99.9<span className="text-2xl">%</span></p>
+              <p className="text-xs text-gray-500 uppercase tracking-[0.2em] font-black mt-2">Uptime Reliability</p>
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl p-6 border border-gray-300">
-            <p className="text-xs font-bold text-gray-500 uppercase mb-4 tracking-tighter">Current Build</p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm text-gray-800 font-bold">v2</div>
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-[32px] p-8 border border-gray-300 shadow-sm">
+            <p className="text-[10px] font-black text-gray-500 uppercase mb-4 tracking-[0.2em]">Build Artifact</p>
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-xl text-gray-900 font-black text-xl border border-gray-200">v2</div>
               <div>
-                <p className="text-sm font-bold text-gray-800">Enterprise Edition</p>
-                <p className="text-[10px] text-gray-500">BleMesh Core v4.1.0-stable</p>
+                <p className="text-lg font-black text-gray-900 tracking-tight leading-none">Enterprise</p>
+                <p className="text-[10px] text-gray-500 font-bold uppercase mt-1 tracking-wider">BleMesh v4.1.0-stable</p>
               </div>
             </div>
           </div>
