@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { 
-  Shield, Users, Database, Zap, 
+import {
+  Shield, Users, Database, Zap,
   ArrowRight, Sparkles, Target, Microscope
 } from "lucide-react";
 
@@ -22,7 +22,7 @@ export default function DashboardHome() {
               <span className="text-blue-200">Attendance System</span>
             </h1>
             <p className="text-lg text-blue-50 max-w-xl leading-relaxed opacity-90">
-              Welcome to the central command for the BLE Mesh-based attendance network. 
+              Welcome to the central command for the BLE Mesh-based attendance network.
               Monitor live sessions, manage database records, and ensure system integrity from one interface.
             </p>
           </div>
@@ -53,39 +53,39 @@ export default function DashboardHome() {
           <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-200 p-10 shadow-sm group hover:shadow-xl transition-all duration-500">
             {/* Background Glow */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
-            
+
             <div className="relative z-10 space-y-8">
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-200 rotate-3 group-hover:rotate-6 transition-transform">
                   <Target className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">Project Mission</h2>
-                  <p className="text-blue-600 font-bold text-sm uppercase tracking-widest mt-1">Innovation & Problem Solving</p>
+                  <h2 className="text-3xl font-black text-gray-900 tracking-tight">The Architectural Blueprint</h2>
+                  <p className="text-blue-600 font-bold text-sm uppercase tracking-widest mt-1">Defeating Proxies at the Hardware Level</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <p className="text-xl text-gray-600 leading-relaxed font-medium">
-                  We are on a mission to redefine campus attendance through the power of 
-                  <span className="text-blue-600 px-2">BLE Mesh Networking</span>.
+                  We have completely redesigned the core mechanics of campus attendance, shifting from a <strong className="text-gray-900">15-minute administrative burden</strong> to a <span className="text-blue-600 px-2 font-bold bg-blue-50 rounded-lg">30-second digital ripple</span>.
                 </p>
                 <p className="text-gray-500 leading-relaxed">
-                  The current education system is plagued by inefficient, expensive, and easily defeated 
-                  attendance tracking methods. Our peer-to-peer approach eliminates bottlenecks and 
-                  ensures integrity without expensive hardware.
+                  Dive deep into our comprehensive engineering manifesto. Discover how we utilize <strong className="text-gray-700">Hardware-Backed Biometric Vaults</strong>, the <strong className="text-gray-700">Google Play Integrity API</strong>, and a strict <strong className="text-gray-700">150ms RTT Cryptographic Handshake</strong> to mathematically defeat Relay, Replay, and Spoofing attacks while ensuring a zero-friction experience for both students and faculty.
                 </p>
               </div>
 
               <div className="pt-4 flex flex-wrap gap-4">
-                <Link 
+                <Link
                   href="/mission"
                   className="inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-500/20 active:scale-95 group"
                 >
-                  Explore Mission & Architecture
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <span className="flex flex-col items-start">
+                    <span className="block">Explore the Detailed Architecture</span>
+                    <span className="text-blue-300 text-xs font-medium">Interactive 6-Part Technical Deep Dive</span>
+                  </span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform ml-2" />
                 </Link>
-                
+
                 <div className="flex items-center gap-2 text-gray-400 text-sm font-bold ml-2">
                   <Microscope className="w-4 h-4 text-blue-400" />
                   <span>Research Backed</span>
@@ -123,7 +123,7 @@ export default function DashboardHome() {
         <div className="space-y-6">
           <div className="bg-gray-950 rounded-[32px] p-10 text-white shadow-2xl flex flex-col gap-8 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            
+
             <h3 className="text-xl font-bold flex items-center gap-3">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -131,7 +131,7 @@ export default function DashboardHome() {
               </span>
               System Status
             </h3>
-            
+
             <div className="space-y-5">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-gray-400 font-medium">API Server</span>
