@@ -1,10 +1,16 @@
 import axios from 'axios';
 
+// ─── CONFIGURATION ───
+// Edit this constant directly for your Vercel deployment
+const DEFAULT_API_URL = 'https://intershifting-heterogonously-angella.ngrok-free.dev';
+
 export const getBaseUrl = () => {
     if (typeof window !== 'undefined') {
-        return localStorage.getItem('customApiUrl') || 'http://localhost:8000';
+        // This allows you to change the URL on the fly in the browser:
+        // Open Console -> localStorage.setItem('customApiUrl', 'https://your-api.com')
+        return localStorage.getItem('customApiUrl') || DEFAULT_API_URL;
     }
-    return 'http://localhost:8000';
+    return DEFAULT_API_URL;
 };
 
 const api = axios.create({
@@ -16,6 +22,10 @@ api.interceptors.request.use((config) => {
     if (typeof window !== 'undefined') {
         config.baseURL = getBaseUrl();
         const token = localStorage.getItem('access_token');
+        
+        // Bypass ngrok browser warning
+        config.headers['ngrok-skip-browser-warning'] = 'true';
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -73,8 +83,8 @@ api.interceptors.response.use(
         if (error.response?.status === 401) {
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
-            if (typeof window !== 'undefined' && 
-                window.location.pathname !== '/login' && 
+            if (typeof window !== 'undefined' &&
+                window.location.pathname !== '/login' &&
                 window.location.pathname !== '/') {
                 window.location.href = '/login';
             }
