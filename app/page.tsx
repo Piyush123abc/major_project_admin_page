@@ -7,8 +7,8 @@ import { ArrowRight, Activity, Cpu, Network, Lock, FileText, ChevronRight } from
 // HARDCODED LINKS — Edit these if you need to update any external URLs or docs
 // ─────────────────────────────────────────────────────────────────────────────
 const LINKS = {
-  googleGroup: "https://groups.google.com/g/ripple-class-testers",
-  playStoreBeta: "https://play.google.com/apps/testing/com.piyush123abc.attendance_app",
+  googleGroup: "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fripple-class-testers",
+  playStoreBeta: "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Fcom.piyush123abc.attendance_app",
   projectPdf: "/project-explanation.pdf",
   architecture: "/mission",
 };
