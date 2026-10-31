@@ -1,26 +1,41 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Activity, Cpu, Network, Lock, FileText, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  Activity,
+  Cpu,
+  Network,
+  Lock,
+  FileText,
+  ChevronRight,
+  Download,
+} from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // HARDCODED LINKS — Edit these if you need to update any external URLs or docs
 // ─────────────────────────────────────────────────────────────────────────────
 const LINKS = {
-  googleGroup: "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fripple-class-testers",
-  playStoreBeta: "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Fcom.piyush123abc.attendance_app",
+  googleGroup:
+    "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fgroups.google.com%2Fg%2Fripple-class-testers",
+  playStoreBeta:
+    "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Fcom.piyush123abc.attendance_app",
+  apkDirect:
+    "https://github.com/Piyush123abc/major_project_frontend/releases/latest/download/RippleAttendance.apk",
   projectPdf: "/project-explanation.pdf",
   architecture: "/mission",
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function DashboardHome() {
+  const [distributionMode, setDistributionMode] = useState<"playstore" | "apk">("playstore");
+
   return (
     <div className="max-w-6xl mx-auto space-y-8 pb-20">
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden rounded-[2rem] bg-white border border-gray-200 p-8 md:p-14 shadow-sm">
-        {/* Subtle technical grid background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
         <div className="relative z-10 flex flex-col gap-8 items-start">
@@ -48,7 +63,6 @@ export default function DashboardHome() {
             </p>
           </div>
 
-          {/* Huge Architecture CTA right in the hero so it cannot be missed */}
           <div className="mt-2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <Link
               href={LINKS.architecture}
@@ -71,7 +85,6 @@ export default function DashboardHome() {
               <span>Read Original Paper (PDF)</span>
             </a>
           </div>
-
         </div>
       </section>
 
@@ -84,56 +97,105 @@ export default function DashboardHome() {
           {/* ── TESTER ONBOARDING CARD ── */}
           <div className="bg-gray-900 rounded-[2rem] p-8 md:p-10 text-white shadow-xl border border-gray-800">
             <div className="relative z-10">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
-                  <Activity className="w-5 h-5 text-blue-400" />
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-500/30">
+                    <Activity className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-black tracking-tight">Beta Tester Access</h3>
+                    <p className="text-gray-400 text-sm font-medium">Join the field trial deployment</p>
+                  </div>
                 </div>
+
+                {/* DISTRIBUTION TOGGLE */}
+                <div className="inline-flex p-1 bg-gray-800 rounded-xl border border-gray-700 self-start sm:self-auto">
+                  <button
+                    type="button"
+                    onClick={() => setDistributionMode("playstore")}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "playstore"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-400 hover:text-gray-200"
+                      }`}
+                  >
+                    Play Store
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDistributionMode("apk")}
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "apk"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-400 hover:text-gray-200"
+                      }`}
+                  >
+                    Direct APK
+                  </button>
+                </div>
+              </div>
+
+              {/* DEFAULT: PLAY STORE VIEW */}
+              {distributionMode === "playstore" ? (
                 <div>
-                  <h3 className="text-2xl font-black tracking-tight">Beta Tester Access</h3>
-                  <p className="text-gray-400 text-sm font-medium">Join the field trial deployment</p>
+                  <p className="text-gray-300 leading-relaxed mb-8">
+                    Want hands-on access to the application? Follow these two steps in order.
+                    <strong className="text-white bg-blue-500/20 px-2 py-0.5 rounded ml-1">
+                      Both steps must use the exact same Google account.
+                    </strong>
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <a
+                      href={LINKS.googleGroup}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col gap-4 p-6 rounded-2xl bg-gray-800/50 border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black uppercase tracking-widest text-gray-500">Step 1</span>
+                        <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-lg text-white mb-1">Join Google Group</p>
+                        <p className="text-sm text-gray-400">Request access to the tester community</p>
+                      </div>
+                    </a>
+
+                    <a
+                      href={LINKS.playStoreBeta}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col gap-4 p-6 rounded-2xl bg-gray-800/50 border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all"
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-black uppercase tracking-widest text-gray-500">Step 2</span>
+                        <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-lg text-white mb-1">Play Store Download</p>
+                        <p className="text-sm text-gray-400">Install the beta using the same account</p>
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              <p className="text-gray-300 leading-relaxed mb-8">
-                Want hands-on access to the application? Follow these two steps in order.
-                <strong className="text-white bg-blue-500/20 px-2 py-0.5 rounded ml-1">Both steps must use the exact same Google account.</strong>
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Step 1 */}
-                <a
-                  href={LINKS.googleGroup}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-4 p-6 rounded-2xl bg-gray-800/50 border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-black uppercase tracking-widest text-gray-500">Step 1</span>
-                    <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                  </div>
+              ) : (
+                /* TOGGLED: DIRECT APK DOWNLOAD VIEW */
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 rounded-2xl bg-gray-800/50 border border-gray-700">
                   <div>
-                    <p className="font-bold text-lg text-white mb-1">Join Google Group</p>
-                    <p className="text-sm text-gray-400">Request access to the tester community</p>
+                    <h4 className="text-lg font-bold text-white mb-1">Direct APK Sideload</h4>
+                    <p className="text-sm text-gray-400 leading-relaxed">
+                      Download the standalone binary without Play Store or Google Groups verification.
+                    </p>
                   </div>
-                </a>
-
-                {/* Step 2 */}
-                <a
-                  href={LINKS.playStoreBeta}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex flex-col gap-4 p-6 rounded-2xl bg-gray-800/50 border border-gray-700 hover:bg-gray-800 hover:border-gray-600 transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-black uppercase tracking-widest text-gray-500">Step 2</span>
-                    <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-lg text-white mb-1">Play Store Download</p>
-                    <p className="text-sm text-gray-400">Install the beta using the same account</p>
-                  </div>
-                </a>
-              </div>
+                  <a
+                    href={LINKS.apkDirect}
+                    download
+                    className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-600/30 active:scale-95 whitespace-nowrap"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Download APK</span>
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
@@ -142,12 +204,16 @@ export default function DashboardHome() {
             <div className="p-8 bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-md transition-all">
               <Lock className="w-8 h-8 text-blue-600 mb-4" />
               <h3 className="font-black text-xl text-gray-900 mb-2">Cryptographic Handshake</h3>
-              <p className="text-gray-500 leading-relaxed font-medium">150ms RTT protocol mathematically defeats relay and replay attacks at the hardware level.</p>
+              <p className="text-gray-500 leading-relaxed font-medium">
+                150ms RTT protocol mathematically defeats relay and replay attacks at the hardware level.
+              </p>
             </div>
             <div className="p-8 bg-white rounded-[2rem] border border-gray-200 shadow-sm hover:shadow-md transition-all">
               <Network className="w-8 h-8 text-indigo-600 mb-4" />
               <h3 className="font-black text-xl text-gray-900 mb-2">Unreliable Channels</h3>
-              <p className="text-gray-500 leading-relaxed font-medium">Engineered to aggregate identities seamlessly even across highly congested BLE environments.</p>
+              <p className="text-gray-500 leading-relaxed font-medium">
+                Engineered to aggregate identities seamlessly even across highly congested BLE environments.
+              </p>
             </div>
           </div>
         </div>
