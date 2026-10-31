@@ -114,8 +114,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("playstore")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "playstore"
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "text-gray-400 hover:text-gray-200"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Play Store
@@ -124,8 +124,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("apk")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "apk"
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "text-gray-400 hover:text-gray-200"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Direct APK
@@ -181,9 +181,9 @@ export default function DashboardHome() {
                 /* TOGGLED: DIRECT APK DOWNLOAD VIEW */
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 p-6 rounded-2xl bg-gray-800/50 border border-gray-700">
                   <div>
-                    <h4 className="text-lg font-bold text-white mb-1">Direct APK Sideload</h4>
+                    <h4 className="text-lg font-bold text-white mb-1">Direct APK Download</h4>
                     <p className="text-sm text-gray-400 leading-relaxed">
-                      Download the standalone binary without Play Store or Google Groups verification.
+                      Fast APK download without a Play Store account.
                     </p>
                   </div>
                   <a
