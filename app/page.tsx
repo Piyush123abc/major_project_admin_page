@@ -22,7 +22,7 @@ const LINKS = {
   playStoreBeta:
     "https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fplay.google.com%2Fapps%2Ftesting%2Fcom.piyush123abc.attendance_app",
   apkDirect:
-    "https://github.com/Piyush123abc/major_project_frontend/releases/latest/download/RippleAttendance.apk",
+    "https://github.com/Piyush123abc/major_project_frontend/releases/latest/download/RippleApp.apk",
   projectPdf: "/project-explanation.pdf",
   architecture: "/mission",
 };
