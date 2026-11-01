@@ -11,6 +11,8 @@ import {
   FileText,
   ChevronRight,
   Download,
+  Play,
+  X,
 } from "lucide-react";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -25,11 +27,13 @@ const LINKS = {
     "https://github.com/Piyush123abc/major_project_frontend/releases/latest/download/RippleApp.apk",
   projectPdf: "/project-explanation.pdf",
   architecture: "/mission",
+  demoYoutubeId: "mlFb1qkGBOs",
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function DashboardHome() {
   const [distributionMode, setDistributionMode] = useState<"playstore" | "apk">("playstore");
+  const [showVideoModal, setShowVideoModal] = useState(false);
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 pb-20">
@@ -63,25 +67,36 @@ export default function DashboardHome() {
             </p>
           </div>
 
-          <div className="mt-2 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          {/* Action Row */}
+          <div className="mt-2 flex flex-wrap gap-4 w-full sm:w-auto">
             <Link
               href={LINKS.architecture}
-              className="group relative inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-5 rounded-xl font-black text-lg md:text-xl overflow-hidden transition-all hover:bg-blue-700 hover:scale-[1.02] shadow-[0_0_40px_rgba(37,99,235,0.3)] active:scale-95"
+              className="group relative inline-flex items-center justify-center gap-3 bg-blue-600 text-white px-8 py-4 rounded-xl font-black text-base md:text-lg overflow-hidden transition-all hover:bg-blue-700 hover:scale-[1.02] shadow-[0_0_30px_rgba(37,99,235,0.25)] active:scale-95"
             >
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-150%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(150%)]">
                 <div className="relative h-full w-8 bg-white/20" />
               </div>
               <span>Explore The Architecture</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
+
+            {/* WATCH VIDEO TRIGGER BUTTON */}
+            <button
+              type="button"
+              onClick={() => setShowVideoModal(true)}
+              className="inline-flex items-center justify-center gap-2.5 bg-gray-900 hover:bg-gray-800 text-white border border-gray-700 px-7 py-4 rounded-xl font-bold text-base transition-all active:scale-95 shadow-sm hover:scale-[1.02]"
+            >
+              <Play className="w-4 h-4 fill-white text-white" />
+              <span>Watch Working Demo</span>
+            </button>
 
             <a
               href={LINKS.projectPdf}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200 px-8 py-5 rounded-xl font-bold text-lg md:text-xl transition-all active:scale-95"
+              className="inline-flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 border border-gray-200 px-7 py-4 rounded-xl font-bold text-base transition-all active:scale-95"
             >
-              <FileText className="w-5 h-5 text-gray-500" />
+              <FileText className="w-4 h-4 text-gray-500" />
               <span>Read Original Paper (PDF)</span>
             </a>
           </div>
@@ -114,8 +129,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("playstore")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "playstore"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-gray-400 hover:text-gray-200"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Play Store
@@ -124,8 +139,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("apk")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "apk"
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-gray-400 hover:text-gray-200"
+                        ? "bg-blue-600 text-white shadow-sm"
+                        : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Direct APK
@@ -270,6 +285,49 @@ export default function DashboardHome() {
 
         </div>
       </section>
+
+      {/* ── IN-PLACE ON-SITE VIDEO MODAL (NO REDIRECT) ── */}
+      {showVideoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          {/* Backdrop click to dismiss */}
+          <div
+            className="absolute inset-0"
+            onClick={() => setShowVideoModal(false)}
+          />
+
+          <div className="relative z-10 w-full max-w-4xl bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-gray-900/60">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+                <h4 className="font-bold text-sm text-gray-200">
+                  Ripple Architecture & Working Demonstration
+                </h4>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowVideoModal(false)}
+                className="p-1 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* 16:9 In-Place Embed Player */}
+            <div className="relative w-full pt-[56.25%] bg-black">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src={`https://www.youtube.com/embed/${LINKS.demoYoutubeId}?autoplay=1&rel=0`}
+                title="Ripple Working Demonstration"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
