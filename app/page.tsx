@@ -1,5 +1,5 @@
 "use client";
-
+import YouTubePlayer from "./components/YouTubePlayer";
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -27,7 +27,7 @@ const LINKS = {
     "https://github.com/Piyush123abc/major_project_frontend/releases/latest/download/RippleApp.apk",
   projectPdf: "/project-explanation.pdf",
   architecture: "/mission",
-  demoYoutubeId: "mlFb1qkGBOs",
+  demoYoutubeId: "mIFb1qkGBOs", // Capital 'I'
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -80,14 +80,14 @@ export default function DashboardHome() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            {/* WATCH VIDEO TRIGGER BUTTON */}
+            {/* PROJECT EXPLANATION VIDEO BUTTON */}
             <button
               type="button"
               onClick={() => setShowVideoModal(true)}
               className="inline-flex items-center justify-center gap-2.5 bg-gray-900 hover:bg-gray-800 text-white border border-gray-700 px-7 py-4 rounded-xl font-bold text-base transition-all active:scale-95 shadow-sm hover:scale-[1.02]"
             >
               <Play className="w-4 h-4 fill-white text-white" />
-              <span>Watch Working Demo</span>
+              <span>Project Explanation Video</span>
             </button>
 
             <a
@@ -129,8 +129,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("playstore")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "playstore"
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "text-gray-400 hover:text-gray-200"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Play Store
@@ -139,8 +139,8 @@ export default function DashboardHome() {
                     type="button"
                     onClick={() => setDistributionMode("apk")}
                     className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${distributionMode === "apk"
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "text-gray-400 hover:text-gray-200"
+                      ? "bg-blue-600 text-white shadow-sm"
+                      : "text-gray-400 hover:text-gray-200"
                       }`}
                   >
                     Direct APK
@@ -286,44 +286,31 @@ export default function DashboardHome() {
         </div>
       </section>
 
-      {/* ── IN-PLACE ON-SITE VIDEO MODAL (NO REDIRECT) ── */}
+      {/* ── TRUE FULL-SCREEN THEATER VIDEO MODAL ── */}
       {showVideoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-          {/* Backdrop click to dismiss */}
-          <div
-            className="absolute inset-0"
-            onClick={() => setShowVideoModal(false)}
-          />
-
-          <div className="relative z-10 w-full max-w-4xl bg-gray-950 border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800 bg-gray-900/60">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-                <h4 className="font-bold text-sm text-gray-200">
-                  Ripple Architecture & Working Demonstration
-                </h4>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowVideoModal(false)}
-                className="p-1 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+        <div className="fixed inset-0 z-50 flex flex-col w-screen h-screen bg-black">
+          {/* Top Control Bar */}
+          <div className="flex items-center justify-between px-6 py-4 bg-gray-950/95 border-b border-gray-800 z-10">
+            <div className="flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
+              <h3 className="font-bold text-sm md:text-base text-white tracking-wide">
+                Ripple Protocol — System Architecture & Technical Breakdown
+              </h3>
             </div>
+            <button
+              type="button"
+              onClick={() => setShowVideoModal(false)}
+              className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white border border-gray-700 transition-colors text-sm font-semibold active:scale-95"
+              aria-label="Close modal"
+            >
+              <span>Close</span>
+              <X className="w-4 h-4" />
+            </button>
+          </div>
 
-            {/* 16:9 In-Place Embed Player */}
-            <div className="relative w-full pt-[56.25%] bg-black">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${LINKS.demoYoutubeId}?autoplay=1&rel=0`}
-                title="Ripple Working Demonstration"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
+          {/* Edge-to-Edge Video Container */}
+          <div className="flex-1 w-full h-full bg-black">
+            <YouTubePlayer videoId={LINKS.demoYoutubeId} />
           </div>
         </div>
       )}
